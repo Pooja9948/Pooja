@@ -1,44 +1,35 @@
-import java.util.*;
-class InsertionSort{
+import java.util.Arrays;
+import java.util.Scanner;
 
-public static void main(String[] args)
-{
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter a string");
-	String st=sc.nextLine();
-	char ch[]=new char[st.length()];
-	ch=st.toCharArray();
-	String st1=" ";
-	int i=0;
-	for(;i<ch.length;i++)
-	{
-		int k=i;
-		while(i<ch.length && ch[i]!=' ')
-		i++;
-		int j=i-1;
+public class InsertionSort {
 
-		if(i<ch.length)
-		st1=st1+insSort(st,k,j)+ch[i];
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a string");
+		String str = sc.nextLine();
+		
+		String string=insertionSort(str);
+		System.err.println("Sorted String:");
+		string =string.substring(1, string.length()-1).replaceAll(",","");
+		System.out.println(string);
+		
 	}
-		System.out.println(st);
-}
+	public static String insertionSort(String str) {
 
-public static String insSort(String st,int k,int j)
-{
-	char temp;
-	char ch[]=st.toCharArray();
-	for(;k<=j;k++)
-	{
-		for(int l=k;l>0;l++)
-		{
-			if(ch[l]<ch[l-1])
-			{
-				temp=ch[l];
-				ch[l]=ch[l-1];
-				ch[l-1]=temp;
+		String[] sting = str.split(" ");
+		for (int j = 0; j < sting.length; j++) {
+			int i = 0;
+			String key = sting[j];
+			i = j - 1;
+			while (i >= 0) {
+				if (key.compareTo(sting[i]) > 0) {
+					break;
+				}
+				sting[i + 1] = sting[i];
+				i--;
 			}
+			sting[i + 1] = key;
 		}
+		return Arrays.toString(sting);
 	}
-	return st;
-}
 }
