@@ -2,20 +2,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 class BinarySearch{
-public static void main(String[] args){
+public static void main(String[] args) throws IOException{
+	String file_name="Home:/Pooja/JavaCode/MyFile.txt";
 try {
-        FileReader reader = new FileReader("MyFile.txt");
-            int character;
- 
-            while ((character = reader.read()) != -1) {
-                System.out.print((char) character);
-                while(character>=0 && character)
-                
-            }
-            reader.close();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+     ReadFile file= new ReadFile(file_name);
+     String[] aryLines = file.OpenFile();
+    }catch(IOException e){
+    	e.printStackTrace();
+    }
 }
 }
