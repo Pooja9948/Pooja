@@ -1,0 +1,6 @@
+class Gamble{
+	public static void main(String[] args){
+        double stake=1;
+        int trial;
+	}
+}
