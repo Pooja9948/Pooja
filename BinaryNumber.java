@@ -11,7 +11,7 @@ public class BinaryNumber {
         int n=sc.nextInt();
         toBinary(n);
 	}
-    public static void toBinary(int n){//
+    public static void toBinary(int n){
     	int binary[] = new int[40];
         int index = 0;
         while(n > 0){

@@ -5,7 +5,7 @@ class Gamble{
         int stake=Integer.parseInt(args[0]);
         int goal=Integer.parseInt(args[1]);;
         int trial=Integer.parseInt(args[2]);;
-        }catch(Exception e){
+        }catch(NumberFormatException e){
                 System.out.println("Exception caught!!!");
                 e.printStackTrace();
         }

@@ -7,6 +7,7 @@ debug.log
 *.exe
 *.o
 *.so
+*.save
 
 
 # Packages #
