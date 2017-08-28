@@ -1,14 +1,14 @@
 import java.io.*;
 class Gamble{
-	public static void main(String[] args){
-        try{
-        int stake=Integer.parseInt(args[0]);
-        int goal=Integer.parseInt(args[1]);;
-        int trial=Integer.parseInt(args[2]);;
-        }catch(NumberFormatException e){
-                System.out.println("Exception caught!!!");
-                e.printStackTrace();
-        }
+	public static void main(String[] args) throws ArrayIndexOutOfBoundsException{
+       // try{
+                int stake=Integer.parseInt(args[0]);
+                int goal=Integer.parseInt(args[1]);
+                int trial=Integer.parseInt(args[2]);
+       // }catch(NumberFormatException e){
+        //        System.out.println("Exception caught!!!");
+        //        e.printStackTrace();
+        //}
         int win=0;
         int bet=0;
         int lose=0;
