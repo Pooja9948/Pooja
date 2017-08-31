@@ -7,13 +7,30 @@ public class AnagramPalindromePrime {
 	public static void main(String[] args) {
 		int limit = 1000;
         System.out.println("Prime numbers between 1 and " + limit);
-        checkPrime(limit);
+        String [] strArray=checkPrime(limit);
+        for(int i=0;i<strArray.length;i++){
+        System.out.println(strArray[i]);
+        }
+        System.out.println("Anagram in given range of prime numbers are:");
+        for (int i = 0; i < strArray.length; i++) {
+			for (int j = i + 1; j < strArray.length; j++) {
+				if (checkAnagram(strArray[i], strArray[j])) {
+					System.out.println(strArray[i] + "  " + strArray[j]);
+				}
+			}
+		}
+        System.out.println("Palindrome in given range of prime numbers are:");
+		for (int i = 0; i < strArray.length; i++) {
+			if (palindrome(strArray[i])) {
+				System.out.println(strArray[i]);
+			}
+		}
 		// TODO Auto-generated method stub
 
 	}
-	public static void checkPrime(int limit){
-		//int k[]=new int[limit];
-		ArrayList<Integer> k = new ArrayList<Integer>(limit);
+	public static String[] checkPrime(int limit){
+		String[] array = new String[1000];
+		int position=0;
 		for(int i=2; i < limit; i++){
             boolean isPrime = true;
              for(int j=2; j < i ; j++){
@@ -23,40 +40,60 @@ public class AnagramPalindromePrime {
                  }
              }
    
-             if(isPrime)
-            	 for (int i1=1; i1<=limit; i1++)
-                     k.add(i1);
-                 System.out.print(i + " ");
-                 
-             //pallindrome(i);
-                 //System.out.println("Pallindrome numbers are :");
-                // if(pallindrome(i))
-                	 //System.out.print(i);
-                     
-       }
-		for (int i1=0; i1<k.size(); i1++)
-            System.out.print(k.get(i1)+" ");
-		
+             if(isPrime){
+            	 array[position] = String.valueOf(i);
+				position++;
+             }
+		}
+         String[] array1 = new String[position];
+ 		for (int k = 0; k < position; k++) {
+ 			array1[k] = array[k];
+ 		}
+ 		return array1;
+             
 	}
-	public static void pallindrome(int i){
-		int res=0;
-		int t=i;
-			while(i!=0){
-			int n=i%10;
-			res =(res*10)+n;
-			n=n/10;
-		}if(t==res)
-			System.out.print(i);
+	public static boolean palindrome(String s){
+		if (s.length() < 2) {
+			return false;
+		}
+		char[] c = s.toCharArray();
+		int n = c.length;
+		for (int i = 0; i < n; i++) {
+			if (c[i] != c[n - 1 - i]) {
+				return false;
+			}
+		}
+		return true;
 	}
-	public static void anagram(int i){
-		int res=0;
-		int t=i;
-			while(i!=0){
-			int n=i%10;
-			res =(res*10)+n;
-			n=n/10;
-		}if(t==res)
-			System.out.print(i);
+	
+	public static boolean checkAnagram(String string1 , String string2)
+	{
+		if(string1.length()!=string2.length())
+		{
+			return false;
+		}
+		char[] a = string1.toCharArray();
+		sort(a);
+		char[] b = string2.toCharArray();
+		sort(b);
+		for (int i = 0; i < a.length; i++) {
+			if(a[i]!=b[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	public static void sort(char[] ab){
+		for(int i=0;i<ab.length;i++){
+			for(int j=i+1;j<ab.length;j++){
+				if(ab[i]>ab[j]){
+					char temp=ab[i];
+					ab[i]=ab[j];
+					ab[j]=temp;
+				}
+			}
+		}
 	}
 
 }
