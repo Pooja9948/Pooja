@@ -1,59 +1,62 @@
-	package com.BridgeLabzPrograms;
+package com.BridgeLabzPrograms;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
-class Node
+class Stack
 {
-    public int data;
-    public Node next;
-    public Node(int x)
+    static final int MAX = 1000;
+    int top;
+    int a[] = new int[MAX]; // Maximum size of Stack
+ 
+    boolean isEmpty()
     {
-        data=x;
+        return (top < 0);
     }
-    public void display()
+    Stack()
     {
-        System.out.println(data+" ");
+        top = -1;
     }
-}	
+ 
+    boolean push(int x)
+    {
+        if (top >= MAX)
+        {
+            System.out.println("Stack Overflow");
+            return false;
+        }
+        else
+        {
+            a[++top] = x;
+            return true;
+        }
+    }
+}
 public class PrimeStack {
 
-	public Node first;
-    public PrimeStack()
-    {
-        first=null;
-    }
-    public boolean isEmpty()
-    {
-        return(first==null);
-    }
-    public void push(int value)
-    {
-        Node newnode=new Node(value);
-        newnode.next=first;
-        first=newnode;
-    }
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PrimeStack ps=new PrimeStack();
-		int limit = 1000;
-		LinkedList<String> l = new LinkedList<String>();
-		for (int i=0; i<1000; i++)
-	       {
-	           ps.push(i);
-	          
-	       }
-        ps.display();
-        int count=ps.getCount();
+		Scanner sc=new Scanner(System.in);
+		Stack s = new Stack();
+		int sizeOfStack=0;
+		for(int i=0;i<=10;i++){
+			System.out.println("Enter number to be push ");
+			int n=sc.nextInt();
+			sizeOfStack++;
+			s.push(n);
+		}
+		
         System.out.println("Anagram in given range of prime numbers are:");
-        for (int i = 0; i < count; i++) {
-			for (int j = i + 1; j < count; j++) {
-				if (ps.checkAnagram(l[i], l[j])) {
-					System.out.println(l[i] + "  " + l[j]);
-				}
-			}
+        for (int i = 0; i < sizeOfStack; i++) {
+        	/*int x=s[i].intvalue();
+        	int y=s[i+1].intvalue();
+			if (checkAnagram(x,y)) {
+				System.out.println(x + "  " + y);
+			}*/
 		}
 	}
-	 public int getCount()
+	 /*public static int getCount()
 	    {
 	        Node temp = first;
 	        int count = 0;
@@ -63,9 +66,9 @@ public class PrimeStack {
 	            temp = temp.next;
 	        }
 	        return count;
-		}
-	public boolean anagram(String string1 , String string2){
-		if(string1.length()!=string2.length())
+	}*/
+	public static boolean checkAnagram(int string1 , int string2){
+		/*if(string1.length()!=string2.length())
 		{
 			return false;
 		}
@@ -78,7 +81,7 @@ public class PrimeStack {
 			{
 				return false;
 			}
-		}
+		}*/
 		return true;
 	}
 	public static void sort(char[] ab){
@@ -92,7 +95,7 @@ public class PrimeStack {
 			}
 		}
 	}
-	 public void display()
+	 /*public void display()
 	    {
 	        Node current=first;
 	        while(current!=null)
@@ -102,5 +105,5 @@ public class PrimeStack {
 	        }
 	        System.out.println("");
 	    }
-
+*/
 }

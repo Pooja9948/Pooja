@@ -11,7 +11,7 @@ char ch[]=st.toCharArray();
 		if(rndm==ch[i])
 			System.out.println("Number already present");
 		else
-			System.out.println("Distict Number");
+			System.out.println("Distinct Number");
     
   }
 }
