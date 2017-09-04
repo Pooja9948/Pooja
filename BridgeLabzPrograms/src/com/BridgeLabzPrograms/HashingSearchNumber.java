@@ -22,7 +22,7 @@ public class HashingSearchNumber {
  	   fr1.read(c1);
  	   System.out.println(c1);
  	   String st = new String(c1);
- 	  String[] sta = st.split(" ");
+ 	  String[] sta = st.split(" ");	
  	  for (String stng : sta)
       {	
           list.add(Integer.parseInt(stng.trim()));

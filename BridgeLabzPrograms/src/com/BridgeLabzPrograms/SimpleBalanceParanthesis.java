@@ -3,6 +3,10 @@ package com.BridgeLabzPrograms;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * @author Pooja
+ *
+ */
 public class SimpleBalanceParanthesis {
 
 	public static void main(String[] args) {
@@ -16,6 +20,12 @@ public class SimpleBalanceParanthesis {
 	else
 			System.out.println("The arithmetic expression is not balanced");
 	}
+	/**
+	 * @param string
+	 * @return boolean
+	 * 
+	 * balanced paranthesis
+	 */
 	public static boolean balancedParenthensies(String s) {
         Stack<Character> stack  = new Stack<Character>();
         for(int i = 0; i < s.length(); i++) {
