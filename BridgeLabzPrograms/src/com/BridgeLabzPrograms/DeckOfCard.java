@@ -3,79 +3,32 @@ package com.BridgeLabzPrograms;
 import java.util.Random;
 public class DeckOfCard {
 
+	static int[][] card = new int[4][13];
+	static String[][] res;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	   char[][] card=new char[4][13];
-       int cardtype=cardType();
-       for(int i=0;i<36;i++){
-    	   Random rand=new Random();
-    	   int rndm = rand.nextInt(13);
-	       switch(rndm){
-	       case 1:
-	    	   System.out.println("2");
-	    	   break;
-	       case 2:
-	    	   System.out.println("3");
-	    	   break;
-	       case 3:
-	    	   System.out.println("4");
-	    	   break;
-	       case 4:
-	    	   System.out.println("5");
-	    	   break;
-	       case 5:
-	    	   System.out.println("6");
-	    	   break;
-	       case 6:
-	    	   System.out.println("7");
-	    	   break;
-	       case 7:
-	    	   System.out.println("8");
-	    	   break;
-	       case 8:
-	    	   System.out.println("9");
-	    	   break;
-	       case 9:
-	    	   System.out.println("10");
-	    	   break;
-	       case 10:
-	    	   System.out.println("Jack");
-	    	   break;
-	       case 11:
-	    	   System.out.println("Queen");
-	    	   break;
-	       case 12:
-	    	   System.out.println("King");
-	    	   break;
-	       case 13:
-	    	   System.out.println("Ace");
-	    	   break;
-	       }
-        }
-       
+	  for (int i = 1; i <= 4; i++) {
+		  for (int j = 0; j < 9; j++) {
+			  allotOneCard(i);
+		}
+		  System.out.println("Player " + i + " cards:");
+		  printCard(i);
+		
 	}
-	public static int cardType(){
-		Random rand=new Random();
- 	   int rndm = rand.nextInt(4);
- 	   switch(rndm){
+	}
+	public static String cardType(int suitNumber){
+		
+ 	   switch(suitNumber){
  		   case 1:
- 			   System.out.println("Clubs");
- 			   
- 			   break;
+ 			   return "Clubs";
  		   case 2:
- 			  System.out.println("Diamonds");
- 			
-			   break;
+ 			  return "Diamonds";
  		   case 3:
- 			  System.out.println("Hearts");
- 			
-			   break;
+ 			  return "Hearts";
  		   case 4:
- 			  System.out.println("Spades");
- 			 
-			   break;
+ 			  return "Spades";
  	   }
- 	   return rndm;
+ 	   return null;
 	}
 	public static void allotOneCard(int playerNumber) {
 		Random random = new Random();
@@ -85,8 +38,51 @@ public class DeckOfCard {
 		if (card[suit][rank] != 0) {
 			allotOneCard(playerNumber);
 		} else {
-			cards[suit][rank] = playerNumber;
+			card[suit][rank] = playerNumber;
 		}
 	}
+	public static void printCard(int playerNumber) {
+		for (int suit = 0; suit < 4; suit++) {
+			for (int rank = 0; rank < 13; rank++) {
+				if (card[suit][rank] == playerNumber) {
+					//res[suit][rank]=cardType(suit);
+					System.out.print(cardType(suit) + " " + rankType(rank) + "\t");
+				}
+			}
+		}
+		System.out.println("\n");
+	}
+
+	static String rankType(int rndm) {
+    switch(rndm){
+    case 1:
+ 	   return "2";
+    case 2:
+    	return "3";
+    case 3:
+    	return "4";
+    case 4:
+    	return "5";
+    case 5:
+    	return "6";
+    case 6:
+    	return "7";
+    case 7:
+    	return "8";
+    case 8:
+    	return "9";
+    case 9:
+    	return "10";
+    case 10:
+ 	   return "Jack";
+    case 11:
+ 	   return "Queen";
+ 	case 12:
+ 	   return "King";
+ 	case 13:
+ 	   return "Ace";
+ 	 }
+	return null;
+}
 
 }
