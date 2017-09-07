@@ -1,19 +1,29 @@
 package com.BridgeLabzPrograms;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * @author Clinical Management Program
+ *
+ */
 public class CliniqueManagement {
 
 	static Scanner sc=new Scanner(System.in);
 	public static void main(String[] args) throws IOException {
 		CliniqueManagement cm=new CliniqueManagement();
+		System.out.println("Clinical Management\n");          
+        char ch;
+		 do
+	        {
 		System.out.println("1. Enter doctor details");
 		System.out.println("2. Enter patient details");
 		System.out.println("3. search doctor ");
@@ -27,16 +37,22 @@ public class CliniqueManagement {
 			case 2:
 				cm.addPatient();
 				break;
-			/*case 3:
-				cm.searchDoctor();
+			case 3:
+				cm.commonPart(choice);
 				break;
 			case 4:
-				cm.searchPatient();
-				break;*/
+				cm.commonPart(choice);
+				break;
 			default:
 				System.out.println("Invalid Choice !!!");
 		}
+		System.out.println("\nDo you want to continue (Type y or n) \n");
+        ch = sc.next().charAt(0);                        
+    } while (ch == 'Y'|| ch == 'y');  
 	}
+	/**add the doctors details
+	 * @throws IOException
+	 */
 	public void addDoctor() throws IOException{
 		sc.nextLine();
 		System.out.println("Enter name : ");
@@ -54,7 +70,7 @@ public class CliniqueManagement {
 	}
 	public void updateJsonDoctor(JSONObject jobj) throws IOException{
 		 JSONParser jsonParser = new JSONParser();
-		 JSONArray bookArray = null;
+		 JSONArray cliniqueArray = null;
 		 File file = new File("/home/bridgeit/Pooja/JavaCode/doctor.txt");
 		 if (!file.exists()) {
 				try {
@@ -62,15 +78,15 @@ public class CliniqueManagement {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				bookArray = new JSONArray();
+				cliniqueArray = new JSONArray();
 			} else {
-				try (FileWriter file1 = new FileWriter("/home/bridgeit/Pooja/JavaCode/doctor.txt")) {
+				try (FileWriter file1 = new FileWriter("/home/bridgeit/Pooja/JavaCode/doctor.json")) {
 					file1.write(jobj.toJSONString());
 					System.out.println("Successfully Copied JSON Object to File...");
 					System.out.println("\nJSON Object: " + jobj);
 				}
 				/*try {
-					bookArray = (JSONArray) jsonParser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.txt"));
+					bookArray = (JSONArray) jsonParser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/doctor.json"));
 				} catch (IOException | org.json.simple.parser.ParseException e) {
 					e.printStackTrace();
 				}*/
@@ -92,7 +108,7 @@ public class CliniqueManagement {
 	}
 	public void updateJsonPatient(JSONObject jobj) throws IOException{
 		 JSONParser jsonParser = new JSONParser();
-		 JSONArray bookArray = null;
+		 JSONArray patientArray = null;
 		 File file = new File("/home/bridgeit/Pooja/JavaCode/patient.txt");
 		 if (!file.exists()) {
 				try {
@@ -100,7 +116,7 @@ public class CliniqueManagement {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				bookArray = new JSONArray();
+				patientArray = new JSONArray();
 			} else {
 				try (FileWriter file1 = new FileWriter("/home/bridgeit/Pooja/JavaCode/patient.txt")) {
 					file1.write(jobj.toJSONString());
@@ -113,5 +129,59 @@ public class CliniqueManagement {
 					e.printStackTrace();
 				}*/
 			}
+	}
+	public void commonPart(int choice) {
+		JSONParser parser=new JSONParser();
+		String name = sc.next();
+		
+		JSONArray bookArray = null;
+		if (choice==3) {
+			try {
+				bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/doctor.json"));
+			} catch (IOException | org.json.simple.parser.ParseException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/patient.txt"));
+			} catch (IOException | org.json.simple.parser.ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Iterator iterator=bookArray.iterator();
+		int i = 0;
+		boolean b = false;
+		outer: while (iterator.hasNext()) {
+			JSONObject jsonObject = (JSONObject) iterator.next();
+			if (jsonObject.get("name").equals(name)) {
+				b = true;
+				switch (choice) {
+				case 3:
+					searchDoctor(jsonObject);
+					break outer;
+				case 4:
+					searchPatient(jsonObject);
+					break outer;
+				}
+			}
+			i++;
+		}
+		if (!b) {
+			System.out.println("\nSorry!!! Person not found...");
+		}
+	}
+	public void searchDoctor(JSONObject jsonObject) {
+		System.out.println("Name:\n" + jsonObject.get("name"));
+		System.out.println("id:\n" + jsonObject.get("id"));
+		System.out.print(jsonObject.get("specilisation") + ", ");
+		System.out.print(jsonObject.get("availability") + " - ");
+		}
+	public void searchPatient(JSONObject jsonObject) {
+		System.out.println("Name:\n" + jsonObject.get("name"));
+		System.out.println("id:\n" + jsonObject.get("id"));
+		System.out.print(jsonObject.get("mobileno") + ", ");
+		System.out.print(jsonObject.get("age") + " - ");
+		
 	}
 }

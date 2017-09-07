@@ -71,7 +71,7 @@ public void addPerson() throws IOException {
 	public void updateJson(JSONObject jobj) throws IOException{
 		 JSONParser jsonParser = new JSONParser();
 		 JSONArray bookArray = null;
-		 File file = new File("/home/bridgeit/Pooja/JavaCode/AddressBook.txt");
+		 File file = new File("/home/bridgeit/Pooja/JavaCode/AddressBook.json");
 		 if (!file.exists()) {
 				try {
 					file.createNewFile();
@@ -80,7 +80,7 @@ public void addPerson() throws IOException {
 				}
 				bookArray = new JSONArray();
 			} else {
-				try (FileWriter file1 = new FileWriter("/home/bridgeit/Pooja/JavaCode/AddressBook.txt")) {
+				try (FileWriter file1 = new FileWriter("/home/bridgeit/Pooja/JavaCode/AddressBook.json")) {
 					file1.write(jobj.toJSONString());
 					System.out.println("Successfully Copied JSON Object to File...");
 					System.out.println("\nJSON Object: " + jobj);
@@ -135,7 +135,7 @@ public void addPerson() throws IOException {
 		String lastName = sc.next();
 		JSONArray bookArray = null;
 		try {
-			bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.txt"));
+			bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.json"));
 		} catch (IOException | org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
@@ -174,7 +174,7 @@ public void addPerson() throws IOException {
 	}
 	public void printWriter(JSONArray bookArray) {
 		try {
-			PrintWriter printWriter = new PrintWriter("/home/bridgeit/Pooja/JavaCode/AddressBook.txt");
+			PrintWriter printWriter = new PrintWriter("/home/bridgeit/Pooja/JavaCode/AddressBook.json");
 			printWriter.write(bookArray.toJSONString());
 			printWriter.close();
 		} catch (FileNotFoundException e) {
