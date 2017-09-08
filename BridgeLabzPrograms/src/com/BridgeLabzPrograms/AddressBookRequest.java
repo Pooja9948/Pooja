@@ -15,12 +15,11 @@ import org.json.simple.parser.JSONParser;
 
 public class AddressBookRequest {
 
-	
 	static Scanner sc=new Scanner(System.in);
 	public static void main(String[] args) throws IOException {
-		
+		char ch;
 		AddressBookRequest adr=new AddressBookRequest();
-		
+		do{
 		System.out.println("1. Add a person ");
 		System.out.println("2. Delete a person ");
 		System.out.println("3. search a person ");  
@@ -40,8 +39,11 @@ public class AddressBookRequest {
 		default:
 			System.out.println("Invalid choice !!!");	
 		}
+		System.out.println("\nDo you want to continue (Type y or n) \n");
+	    ch = sc.next().charAt(0);
+		}while(ch == 'Y'|| ch == 'y');
 	}
-public void addPerson() throws IOException {
+	public void addPerson() throws IOException {
 	    sc.nextLine();
 		System.out.println("Enter first name : ");
 		String firstname=sc.nextLine();
@@ -68,6 +70,7 @@ public void addPerson() throws IOException {
 		JSONObject jobj = pdetail.toJsonObject();
 		updateJson(jobj);
 	}
+	@SuppressWarnings("unused")
 	public void updateJson(JSONObject jobj) throws IOException{
 		 JSONParser jsonParser = new JSONParser();
 		 JSONArray bookArray = null;
@@ -92,6 +95,7 @@ public void addPerson() throws IOException {
 				}*/
 			}
 	}
+	@SuppressWarnings("unchecked")
 	public void edit(JSONObject jsonObject, JSONArray bookArray, int i) {
 		System.out.println("What do you want to edit ?");
 		System.out.println("1. Address");
@@ -131,15 +135,20 @@ public void addPerson() throws IOException {
 	}
 	public void commonPart(int choice) {
 		JSONParser parser=new JSONParser();
+		System.out.println("Enter firstname and lastname : ");
 		String firstName = sc.next();
 		String lastName = sc.next();
 		JSONArray bookArray = null;
 		try {
-			bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.json"));
+			Object obj = parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.json"));
+			JSONObject jsonObject = (JSONObject) obj;
+			bookArray = (JSONArray) jsonObject.get("Company List");
+			//bookArray = (JSONArray) parser.parse(new FileReader("/home/bridgeit/Pooja/JavaCode/AddressBook.json"));
 		} catch (IOException | org.json.simple.parser.ParseException e) {
 			e.printStackTrace();
 		}
-		Iterator iterator=bookArray.iterator();
+		@SuppressWarnings("unchecked")
+		Iterator<JSONObject> iterator=bookArray.iterator();
 		int i = 0;
 		boolean b = false;
 		outer: while (iterator.hasNext()) {
